@@ -1,0 +1,272 @@
+A.  Histogram View. Slide viewing window to select points to render.
+B.  Slide Histogram cursor.
+C.  Set width of the Histogram cursor.
+D.  Color Range and Offset colorize the points.
+E.  Select Equation. 1..5 are MandelBulb variations, 'Julia' is stacked Julia sets.
+F.  Select 'Power' parameter in the equations. (See source code below)
+G.  Select point size.
+H.  VERY Limited Undo. You can only undo the most recent 'Calc'.
+I.  Show/Hide the axes and bounding box.
+J.  Move the Bounding box in respective direction.
+    (Press to either side of center of slider box to control direction and speed)
+    Press 'Calc' button to refresh Point Cloud to new position.
+K.  Stacked Julia sets work differently:
+    The Red and Green axes scroll as usual,
+    but the blue axis holds the stacked 2D Julia set drawings.
+    This column (-R,-I,-M,-Z) control the first Julia set.
+L.  This column (+R,+I,+M,+Z) control the last Julia set.
+    All interior Jula sets linearly interpolate between these two.
+M.  Alter both top and bottom Julia set parameters at the same time.
+N.  Copy Top params to Bottom, or Bottom to Top.
+O.  Qt, Qt2   Quantize (Posterize) the Point cloud values.
+    Sm Does a convolution on the points to smooth them,
+    Sm2 does the same but stronger.
+P.  Calc button  causes complete re-calc of point cloud.
+Q.  Save/Load dialog.
+R.  Dismiss this dialog.
+S.  Select color palette.
+T.  Reset parameters.
+U.  Resolution of point cloud. 1,2 or 4 times 288x288x288
+
+------------------------------------------------------------------------------------------------
+Shader source code that calculates Point Cloud
+------------------------------------------------------------------------------------------------
+
+#define MAX_ITERATIONS 40
+
+kernel void mapShader
+(
+ device Map3D &src [[buffer(0)]],
+ constant Control &control [[buffer(1)]],
+ uint3 pp [[thread_position_in_grid]])
+{
+    device unsigned char &d = src.data[pp.x][pp.y][pp.z];
+    unsigned char iter = 0;
+    
+    if(control.hop > 1) {
+        if(int(pp.x) % control.hop) { d = 0; return; }
+        if(int(pp.y) % control.hop) { d = 0; return; }
+        if(int(pp.z) % control.hop) { d = 0; return; }
+    }
+    
+    float offset = float(control.unused3) / float(NUM_CLOUD);
+    float fpx = float(pp.x) + offset;
+    float fpy = float(pp.y) + offset;
+    float fpz = float(pp.z) + offset;
+
+    // 5 Julia ---------------------------------------------------------------------------
+    if (control.formula == JULIA_FORMULA) {
+        float re,im,mult,zoom;
+        
+        float ratio = fpz / float(WIDTH-1);
+        re = control.re1 + (control.re2 - control.re1) * ratio;
+        im = control.im1 + (control.im2 - control.im1) * ratio;
+        mult = control.mult1 + (control.mult2 - control.mult1) * ratio;
+        zoom = control.zoom1 + (control.zoom2 - control.zoom1) * ratio;
+        
+        float newRe, newIm, oldRe, oldIm;
+        
+        if(zoom == 0) zoom = 1;
+        
+        newRe = control.basex + fpx / zoom;
+        newIm = control.basey + fpy / zoom;
+        
+        for(;;) {
+            oldRe = newRe;
+            oldIm = newIm;
+            newRe = oldRe * oldRe - oldIm * oldIm + re;
+            newIm = mult * oldRe * oldIm + im;
+            
+            if((newRe * newRe + newIm * newIm) > 4) break;
+            if(++iter == MAX_ITERATIONS) {
+                iter = 255;
+                break;
+            }
+        }
+        
+        if(iter == MAX_ITERATIONS) iter = 0;
+        d = iter;
+        return;
+    }
+    
+    float3 w;
+    w.x = control.basex + fpx * control.scale;
+    w.y = control.basey + fpy * control.scale;
+    w.z = control.basez + fpz * control.scale;
+    
+    // 0 Bulb 1 --------------------------------------------------------------------------------
+    if (control.formula == 0) { // https://github.com/jtauber/mandelbulb/blob/master/mandel8.py
+        float r,theta,phi,pwr,ss;
+        
+        for(;;) {
+            if(++iter == MAX_ITERATIONS) break;
+            
+            r = sqrt(w.x * w.x + w.y * w.y + w.z * w.z);
+            theta = atan2(sqrt(w.x * w.x + w.y * w.y), w.z);
+            phi = atan2(w.y,w.x);
+            pwr = pow(r,control.power );
+            ss = sin(theta * control.power);
+            
+            w.x += pwr * ss * cos(phi * control.power);
+            w.y += pwr * ss * sin(phi * control.power);
+            w.z += pwr * cos(theta * control.power);
+            
+            if(w.x * w.x + w.y * w.y + w.z * w.z > 2) break;
+        }
+        
+        if(iter == MAX_ITERATIONS) iter = 0;
+        d = iter;
+        return;
+    }
+    
+    // 1 Bulb 2 -----------------------------------------------------------------------------------
+    if (control.formula == 1) { // alternate Bulb
+        float m = dot(w,w);
+        float dz = 1.0;
+        
+        for(;;) {
+            if(++iter == MAX_ITERATIONS) break;
+            
+            float m2 = m*m;
+            float m4 = m2*m2;
+            dz = 8.0*sqrt(m4*m2*m)*dz + 1.0;
+            
+            float x = w.x; float x2 = x*x; float x4 = x2*x2;
+            float y = w.y; float y2 = y*y; float y4 = y2*y2;
+            float z = w.z; float z2 = z*z; float z4 = z2*z2;
+            
+            float k3 = x2 + z2;
+            float k2s = sqrt(  pow(k3,control.power ));
+            float k2 = 1;  if(k2s != 0) k2 = 1.0 / k2s;
+            float k1 = x4 + y4 + z4 - 6.0*y2*z2 - 6.0*x2*y2 + 2.0*z2*x2;
+            float k4 = x2 - y2 + z2;
+            
+            w.x +=  64.0*x*y*z*(x2-z2)*k4*(x4-6.0*x2*z2+z4)*k1*k2;
+            w.y +=  -16.0*y2*k3*k4*k4 + k1*k1;
+            w.z +=  -8.0*y*k4*(x4*x4 - 28.0*x4*x2*z2 + 70.0*x4*z4 - 28.0*x2*z2*z4 + z4*z4)*k1*k2;
+            
+            m = dot(w,w);
+            if( m > 4.0 ) break;
+        }
+        
+        if(iter == MAX_ITERATIONS) iter = 0;
+        d = iter;
+        return;
+    }
+    
+    float magnitude, r, theta_power, r_power, phi, phi_sin, phi_cos, xxyy;
+    
+    // 2 Bulb 3 -----------------------------------------------------------------------
+    if (control.formula == 2) {
+        for(;;) {
+            if(++iter == MAX_ITERATIONS) break;
+            
+            xxyy = w.x * w.x + w.y * w.y;
+            magnitude = xxyy + w.z * w.z;
+            r = sqrt(magnitude);
+            if(r > 8) break;
+
+            theta_power = atan2(w.y,w.x) * control.power;
+            r_power = pow(r,control.power);
+            
+            phi = asin(w.z / r);
+            phi_cos = cos(phi * control.power);
+            w.x += r_power * cos(theta_power) * phi_cos;
+            w.y += r_power * sin(theta_power) * phi_cos;
+            w.z += r_power * sin(phi * control.power);
+        }
+        
+        if(iter == MAX_ITERATIONS) iter = 0;
+        d = iter;
+        return;
+    }
+    
+    // 3 Bulb 4 -----------------------------------------------------------------------
+    if (control.formula == 3) {
+        for(;;) {
+            if(++iter == MAX_ITERATIONS) break;
+
+            xxyy = w.x * w.x + w.y * w.y;
+            magnitude = xxyy + w.z * w.z;
+            r = sqrt(magnitude);
+            if(r > 8) break;
+
+            theta_power = atan2(w.y,w.x) * control.power;
+            r_power = pow(r,control.power);
+            
+            phi = atan2(sqrt(xxyy), w.z);
+            phi_sin = sin(phi * control.power);
+            w.x += r_power * cos(theta_power) * phi_sin;
+            w.y += r_power * sin(theta_power) * phi_sin;
+            w.z += r_power * cos(phi * control.power);
+        }
+        
+        if(iter == MAX_ITERATIONS) iter = 0;
+        d = iter;
+        return;
+    }
+    
+    // 4 Bulb 5 -----------------------------------------------------------------------
+    if (control.formula == 4) {
+        for(;;) {
+            if(++iter == MAX_ITERATIONS) break;
+            
+            xxyy = w.x * w.x + w.y * w.y;
+            magnitude = xxyy + w.z * w.z;
+            r = sqrt(magnitude);
+            if(r > 8) break;
+            
+            theta_power = atan2(w.y,w.x) * control.power;
+            r_power = pow(r,control.power);
+            
+            phi = acos(w.z / r);
+            phi_cos = cos(phi * control.power);
+            w.x += r_power * cos(theta_power) * phi_cos;
+            w.y += r_power * sin(theta_power) * phi_cos;
+            w.z += r_power * sin(phi*control.power);
+        }
+        
+        if(iter == MAX_ITERATIONS) iter = 0;
+        d = iter;
+    }
+
+    // 6 Box -----------------------------------------------------------------------
+    if (control.formula == 6) {
+        float fLimit  = control.re1;
+        float fValue  = control.im1;
+        float mRadius = control.mult1;
+        float fRadius = control.zoom1;
+        float scale   = control.re2;
+        float mr2 = mRadius * mRadius;
+        float fr2 = fRadius * fRadius;
+        float ffmm = fr2 / mr2;
+        
+        for(;;) {
+            if(++iter == MAX_ITERATIONS) break;
+            
+            if(w.x > fLimit) w.x = fValue - w.x; else if(w.x < -fLimit) w.x = -fValue - w.x;
+            if(w.y > fLimit) w.y = fValue - w.y; else if(w.y < -fLimit) w.y = -fValue - w.y;
+            if(w.z > fLimit) w.z = fValue - w.z; else if(w.z < -fLimit) w.z = -fValue - w.z;
+            
+            r = w.x * w.x + w.y * w.y +w.z * w.z;
+            if(r > control.im2) break;
+            
+            if(r < mr2) {
+                float num = ffmm * scale;
+                w.x *= num;
+                w.y *= num;
+                w.z *= num;
+            }
+            else
+                if(r < fr2) {
+                    float den = fr2 * scale / r;
+                    w.x *= den;
+                    w.y *= den;
+                    w.z *= den;
+                }
+        }
+        
+        if(iter < 2 || iter == MAX_ITERATIONS) iter = 0;
+        d = iter;
+    }
+}
