@@ -29,7 +29,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzJ-Ya-gDp">
-                                <rect key="frame" x="757" y="1012" width="57" height="80"/>
+                                <rect key="frame" x="735" y="996" width="57" height="80"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Control">
                                     <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,9 +47,9 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="XzJ-Ya-gDp" secondAttribute="trailing" constant="20" id="08g-Cm-EmI"/>
-                            <constraint firstItem="XzJ-Ya-gDp" firstAttribute="top" secondItem="Ve7-aF-loD" secondAttribute="bottom" constant="992" id="Mtp-C8-dwe"/>
-                            <constraint firstItem="2Dy-TN-HU4" firstAttribute="top" secondItem="XzJ-Ya-gDp" secondAttribute="bottom" constant="20" id="Ntr-rx-YCD"/>
+                            <constraint firstAttribute="trailing" secondItem="XzJ-Ya-gDp" secondAttribute="trailing" constant="42" id="08g-Cm-EmI"/>
+                            <constraint firstItem="XzJ-Ya-gDp" firstAttribute="top" secondItem="Ve7-aF-loD" secondAttribute="bottom" constant="976" id="Mtp-C8-dwe"/>
+                            <constraint firstItem="2Dy-TN-HU4" firstAttribute="top" secondItem="XzJ-Ya-gDp" secondAttribute="bottom" constant="36" id="Ntr-rx-YCD"/>
                             <constraint firstItem="XzJ-Ya-gDp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3se-qz-xqx" secondAttribute="leading" id="VN4-S3-zby"/>
                             <constraint firstItem="2Dy-TN-HU4" firstAttribute="top" secondItem="NtY-I0-AAn" secondAttribute="bottom" constant="8" id="kTQ-oP-nEP"/>
                             <constraint firstItem="NtY-I0-AAn" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="lsj-IW-mJo"/>
