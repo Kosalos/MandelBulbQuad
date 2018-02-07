@@ -206,10 +206,10 @@ class ViewController: UIViewController {
     var oldXS:CGFloat = 0
     
     @objc func rotated() {
-//        let xs:CGFloat = view.bounds.width
-//        let ys:CGFloat = view.bounds.height
-        let xs = scrnLandscape ? scrnSz[scrnIndex].y : scrnSz[scrnIndex].x
-        let ys = scrnLandscape ? scrnSz[scrnIndex].x : scrnSz[scrnIndex].y
+        let xs:CGFloat = view.bounds.width
+        let ys:CGFloat = view.bounds.height
+//        let xs = scrnLandscape ? scrnSz[scrnIndex].y : scrnSz[scrnIndex].x
+//        let ys = scrnLandscape ? scrnSz[scrnIndex].x : scrnSz[scrnIndex].y
 
         let gap:CGFloat = 5
         let fullWidth:CGFloat = 760
