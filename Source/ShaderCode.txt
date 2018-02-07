@@ -23,7 +23,6 @@ O.  Qt, Qt2   Quantize (Posterize) the Point cloud values.
     Sm2 does the same but stronger.
 P.  Calc button  causes complete re-calc of point cloud.
 Q.  Save/Load dialog.
-R.  Dismiss this dialog.
 S.  Select color palette.
 T.  Reset parameters.
 U.  Resolution of point cloud. 1,2 or 4 times 288x288x288
@@ -49,7 +48,7 @@ kernel void mapShader
         if(int(pp.z) % control.hop) { d = 0; return; }
     }
     
-    float offset = float(control.unused3) / float(NUM_CLOUD);
+    float offset = float(control.cloudIndex) / float(NUM_CLOUD);
     float fpx = float(pp.x) + offset;
     float fpy = float(pp.y) + offset;
     float fpz = float(pp.z) + offset;

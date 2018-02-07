@@ -24,7 +24,7 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
     @IBOutlet var tableView: UITableView!
     
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 30 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 50 }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SLCell", for: indexPath) as! SaveLoadCell
@@ -33,6 +33,7 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
         
         var cc = Control()
         let dateString = loadData(indexPath.row,&cc)
+        let index = indexPath.row + 1
         var str:String = ""
         
         if dateString == "**" {
@@ -40,15 +41,14 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
         }
         else {
             switch Int(cc.formula) {
-            case JULIA_FORMULA : str = String(format:"Julia %@",dateString)
-            case BOX_FORMULA :   str = String(format:"Box %@",dateString)
-            default :            str = String(format:"Bulb %d, %@", cc.formula + 1,dateString)
+            case JULIA_FORMULA : str = String(format:"%2d   Julia %@",index,dateString)
+            case BOX_FORMULA :   str = String(format:"%2d   Box %@",index,dateString)
+            default :            str = String(format:"%2d   Bulb %d, %@", index,cc.formula + 1,dateString)
             }
         }
         
         cell.loadCell.setTitle(str, for: UIControlState.normal)
         cell.loadCell.backgroundColor = bColors[Int(cc.formula)]
-        
         return cell
     }
 

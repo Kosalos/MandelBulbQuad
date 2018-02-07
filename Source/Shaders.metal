@@ -24,7 +24,8 @@ kernel void mapShader
         if(int(pp.z) % control.hop) { d = 0; return; }
     }
     
-    float offset = float(control.unused3) / float(NUM_CLOUD);
+    // run 1,2 or 4 interleaved clouds to add more points render    
+    float offset = float(control.cloudIndex) / float(NUM_CLOUD);
     float fpx = float(pp.x) + offset;
     float fpy = float(pp.y) + offset;
     float fpz = float(pp.z) + offset;
@@ -282,15 +283,15 @@ kernel void mapShader
      A nice value for that is -1.5 (but it can be positive as well).
      */
 
-
 //===================================================================================
+// remove totally surrounded points from the cloud by marking them as '255' (not rendered)
 
 kernel void adjacentShader
 (
  device Map3D &src [[buffer(0)]],
  uint3 p [[thread_position_in_grid]])
 {
-    unsigned char M = 3; // 7;
+    unsigned char M = 3;
     unsigned char d = src.data[p.x][p.y][p.z];
     if(d < M) { src.data[p.x][p.y][p.z] = 255; return; }
     
@@ -319,6 +320,7 @@ kernel void adjacentShader
 }
 
 //===================================================================================
+// set cloud point value to average of neighboring points
 
 #define X 1
 #define Y WIDTH
@@ -366,7 +368,7 @@ kernel void smoothingShader
         
         for(int i=0;i<CONVOLUTION_COUNT;++i) {
             ch = *(ptr + offset[i]);
-            if(ch > 0 && ch < 255) {
+            if(ch > 0 && ch < 255) { // only include rendered points
                 total += int(ch);
                 ++count;
             }
@@ -389,12 +391,13 @@ kernel void quantizeShader
     device unsigned char &d = src.data[p.x][p.y][p.z];
     unsigned char mask = (unsigned char)control.unused1;
     
-    if(d > 0 && d < 255) {
+    if(d > 0 && d < 255) { // only include rendered points
         d = 1 + (d & mask);
     }
 }
 
 //===================================================================================
+// histogram[256] = # points of each value in whole cloud
 
 kernel void histogramShader
 (
@@ -404,7 +407,7 @@ kernel void histogramShader
 {
     int value = int(src.data[p.x][p.y][p.z]);
     
-    if(value > 0 && value < 255) {
+    if(value > 0 && value < 255) { // only include rendered points
         dst->count[value] += 1;
     }
 }
@@ -413,17 +416,17 @@ kernel void histogramShader
 
 kernel void verticeShader
 (
- constant Map3D &src [[buffer(0)]],
- device atomic_uint &counter[[buffer(1)]],
- constant Control &control [[buffer(2)]],
- constant float3 *color [[buffer(3)]],
- device TVertex *vertices[[ buffer(4) ]],
+ constant Map3D &src [[buffer(0)]],             // source point cloud
+ device atomic_uint &counter[[buffer(1)]],      // global value = # vertices in output
+ constant Control &control [[buffer(2)]],       // control params from Swift
+ constant float3 *color [[buffer(3)]],          // color lookup table[256]
+ device TVertex *vertices[[ buffer(4) ]],       // output list of vertices to render
  uint3 p [[thread_position_in_grid]])
 {
     int cIndex = int(src.data[p.x][p.y][p.z]);
-    if(cIndex == 0 || cIndex > 255) return;
+    if(cIndex == 0 || cIndex > 255) return;     // non-rendered point
     
-    if(control.hop > 1) {
+    if(control.hop > 1) {       // 'fast calc' skips most coordinates
         if(int(p.x) % control.hop) return;
         if(int(p.y) % control.hop) return;
         if(int(p.z) % control.hop) return;
@@ -432,13 +435,13 @@ kernel void verticeShader
     if(cIndex < control.center - control.spread) return;
     if(cIndex > control.center + control.spread) return;
     
-    uint index = atomic_load(&counter);
+    uint index = atomic_load(&counter);     // our assigned output vertex index
     if(index >= VMAX) return;
     index = atomic_fetch_add_explicit(&counter, 1, memory_order_relaxed);
     if(index >= VMAX) return;
     
     device TVertex &v = vertices[index];
-    float offset = float(control.unused3) / float(NUM_CLOUD);
+    float offset = float(control.cloudIndex) / float(NUM_CLOUD);
     float center = float(WIDTH/2) + offset;
 
     v.pos.x = (float(p.x) - center) / 2;

@@ -22,13 +22,13 @@
 		1D1FF8E91FF94B5F00A879E3 /* ShaderCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1D1FF8E81FF94B5F00A879E3 /* ShaderCode.txt */; };
 		1D406F001FE86E67002C88F3 /* HistogramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D406EFF1FE86E67002C88F3 /* HistogramView.swift */; };
 		1D4593A51FDF4F7000E6EBFE /* SaveLoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4593A41FDF4F7000E6EBFE /* SaveLoadViewController.swift */; };
-		1D674E5A2003F32100E8B231 /* ControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D674E592003F32100E8B231 /* ControlViewController.swift */; };
+		1D889AEE202ADBBC00A2683F /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D889AED202ADBBC00A2683F /* Background.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D08EEB71FA539C700F287FD /* ArcBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcBall.swift; sourceTree = "<group>"; };
 		1D08EEBB1FA58F0800F287FD /* ColorMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMap.swift; sourceTree = "<group>"; };
-		1D14905F1F9FA199004B538F /* MandelBulb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MandelBulb.app; path = MandelBulbQuad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D14905F1F9FA199004B538F /* MandelBulb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MandelBulb.app; path = MandelBulbST.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D1490621F9FA199004B538F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D1490641F9FA199004B538F /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		1D1490651F9FA199004B538F /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		1D1FF8E81FF94B5F00A879E3 /* ShaderCode.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ShaderCode.txt; sourceTree = "<group>"; };
 		1D406EFF1FE86E67002C88F3 /* HistogramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistogramView.swift; sourceTree = "<group>"; };
 		1D4593A41FDF4F7000E6EBFE /* SaveLoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveLoadViewController.swift; sourceTree = "<group>"; };
-		1D674E592003F32100E8B231 /* ControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlViewController.swift; sourceTree = "<group>"; };
+		1D889AED202ADBBC00A2683F /* Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +81,10 @@
 				1D1490641F9FA199004B538F /* ShaderTypes.h */,
 				1D1490791F9FA784004B538F /* Bulb.swift */,
 				1D1490651F9FA199004B538F /* Renderer.swift */,
-				1D674E592003F32100E8B231 /* ControlViewController.swift */,
 				1D1490671F9FA199004B538F /* ViewController.swift */,
 				1D14906B1F9FA199004B538F /* Main.storyboard */,
 				1D1D9EFD1FD469A3004C2571 /* SliderViewNew.swift */,
+				1D889AED202ADBBC00A2683F /* Background.swift */,
 				1D406EFF1FE86E67002C88F3 /* HistogramView.swift */,
 				1D1D9EFF1FD5BEAB004C2571 /* HelpViewController.swift */,
 				1D4593A41FDF4F7000E6EBFE /* SaveLoadViewController.swift */,
@@ -103,9 +103,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D14905E1F9FA199004B538F /* MandelBulbQuad */ = {
+		1D14905E1F9FA199004B538F /* MandelBulbST */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D1490761F9FA199004B538F /* Build configuration list for PBXNativeTarget "MandelBulbQuad" */;
+			buildConfigurationList = 1D1490761F9FA199004B538F /* Build configuration list for PBXNativeTarget "MandelBulbST" */;
 			buildPhases = (
 				1D14905B1F9FA199004B538F /* Sources */,
 				1D14905C1F9FA199004B538F /* Frameworks */,
@@ -115,7 +115,7 @@
 			);
 			dependencies = (
 			);
-			name = MandelBulbQuad;
+			name = MandelBulbST;
 			productName = MarchingCubesPro;
 			productReference = 1D14905F1F9FA199004B538F /* MandelBulb.app */;
 			productType = "com.apple.product-type.application";
@@ -136,7 +136,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1D14905A1F9FA199004B538F /* Build configuration list for PBXProject "MandelBulbQuad" */;
+			buildConfigurationList = 1D14905A1F9FA199004B538F /* Build configuration list for PBXProject "MandelBulbST" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -149,7 +149,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D14905E1F9FA199004B538F /* MandelBulbQuad */,
+				1D14905E1F9FA199004B538F /* MandelBulbST */,
 			);
 		};
 /* End PBXProject section */
@@ -180,10 +180,10 @@
 				1D1490631F9FA199004B538F /* AppDelegate.swift in Sources */,
 				1D1D9EFE1FD469A3004C2571 /* SliderViewNew.swift in Sources */,
 				1D14907A1F9FA784004B538F /* Bulb.swift in Sources */,
-				1D674E5A2003F32100E8B231 /* ControlViewController.swift in Sources */,
 				1D08EEB81FA539C700F287FD /* ArcBall.swift in Sources */,
 				1D4593A51FDF4F7000E6EBFE /* SaveLoadViewController.swift in Sources */,
 				1D08EEBC1FA58F0800F287FD /* ColorMap.swift in Sources */,
+				1D889AEE202ADBBC00A2683F /* Background.swift in Sources */,
 				1D1D9F001FD5BEAB004C2571 /* HelpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,7 +325,7 @@
 				DEVELOPMENT_TEAM = 7237X7VY2S;
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Harry.com.MandelBulbDual;
+				PRODUCT_BUNDLE_IDENTIFIER = Harry.com.MandelBulbST;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Source/ShaderTypes.h;
 				SWIFT_VERSION = 4.0;
@@ -342,7 +342,7 @@
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Harry.com.MandelBulbDual;
+				PRODUCT_BUNDLE_IDENTIFIER = Harry.com.MandelBulbST;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Source/ShaderTypes.h;
 				SWIFT_VERSION = 4.0;
@@ -353,7 +353,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D14905A1F9FA199004B538F /* Build configuration list for PBXProject "MandelBulbQuad" */ = {
+		1D14905A1F9FA199004B538F /* Build configuration list for PBXProject "MandelBulbST" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D1490741F9FA199004B538F /* Debug */,
@@ -362,7 +362,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		1D1490761F9FA199004B538F /* Build configuration list for PBXNativeTarget "MandelBulbQuad" */ = {
+		1D1490761F9FA199004B538F /* Build configuration list for PBXNativeTarget "MandelBulbST" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D1490771F9FA199004B538F /* Debug */,

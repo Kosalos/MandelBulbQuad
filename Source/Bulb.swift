@@ -9,8 +9,6 @@ let HBUFFERSIZE = MemoryLayout<Int32>.size * 256
 
 enum Busy { case idle,calc,calc2,smooth,smooth2,quantize,vertices,controlLoaded }
 
-var busyCode:Busy = .idle
-
 let FORMULA_JULIA = 5
 
 extension TVertex {
@@ -45,7 +43,7 @@ extension Control {
         
         unused1 = 0
         unused2 = 0
-        unused3 = 0
+        cloudIndex = 0
     }
 }
 
@@ -61,6 +59,7 @@ var pointSize:Float = 4
 var vCount:Int = 0
 
 class Bulb {
+    var busyCode:Busy = .idle
     var vertices:[TVertex] = []
     var vBuffer:MTLBuffer! = nil
 
@@ -282,7 +281,7 @@ class Bulb {
         }
         
         for i in 0 ..< cloudCount {
-            control.unused3 = Int32(i)
+            control.cloudIndex = Int32(i)
             controlBuffer.contents().copyBytes(from: &control, count:MemoryLayout<Control>.stride)
             
             let commandBuffer = commandQueue.makeCommandBuffer()!
@@ -320,7 +319,7 @@ class Bulb {
         memset(vCountBuffer.contents(),0,MemoryLayout<Counter>.stride)
         
         for i in 0 ..< cloudCount {
-            control.unused3 = Int32(i)
+            control.cloudIndex = Int32(i)
             controlBuffer.contents().copyBytes(from: &control, count:MemoryLayout<Control>.stride)
 
             let commandBuffer = commandQueue.makeCommandBuffer()!
@@ -344,7 +343,7 @@ class Bulb {
         memcpy(&result,vCountBuffer.contents(),MemoryLayout<Counter>.stride)
         vCount = Int(result.count)
 
-        if let cvc = cvc { cvc.updateCalcButton(CALC_BUTTON_IDLE) }
+        vc.updateCalcButton(CALC_BUTTON_IDLE)
         
         if hv != nil {
             histogramUpdate()
@@ -449,7 +448,8 @@ class Bulb {
 
     func newBusy(_ code:Busy) {
         busyCode = code
-        vc.mtkView.setNeedsDisplay()
+        vc.mtkViewL.setNeedsDisplay()
+        vc.mtkViewR.setNeedsDisplay()
     }
     
     func fastCalc() {
@@ -481,7 +481,7 @@ class Bulb {
             calcCages()
             if control.hop > 4 { control.hop = 1 }  // finished fast calc
         case .controlLoaded :
-            cvc.controlLoaded()
+            vc.controlLoaded()
         case .idle :
             break
         }

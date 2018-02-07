@@ -72,7 +72,7 @@ class SliderViewNew: UIView {
             return
         }
         
-        UIColor(red:0.2, green:0.2, blue:0.2, alpha: 1).set()
+        UIColor(red:0.1, green:0.1, blue:0.1, alpha: 1).set()
         UIBezierPath(rect:bounds).fill()
         
         // edge -------------------------------------------------
@@ -166,7 +166,7 @@ class SliderViewNew: UIView {
         if !active || !touched { return }
         
         if tag == POWER_SLIDER_TAG {
-            if busyCode == .idle {
+            if bulb.busyCode == .idle {
                 control.power = fClamp(control.power + delta * 10,pRange)
                 bulb.newBusy(.calc2)
                 setNeedsDisplay()
@@ -192,7 +192,7 @@ class SliderViewNew: UIView {
         
         if tag == 3 {   // Scale
             let scl = 1.0 + delta / 4
-            cvc.changeScale(control.scale * scl)
+            vc.changeScale(control.scale * scl)
         }
         
         setNeedsDisplay()
@@ -211,7 +211,6 @@ class SliderViewNew: UIView {
     //MARK: ==================================
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
         if !active { return }
         
         for t in touches {
@@ -233,22 +232,39 @@ class SliderViewNew: UIView {
             }
             
             delta = (Float(pt.x) - scenter) / swidth / 10
-            touched = true
+            
+            if !touched {
+                touched = true
+                Swift.print("Touched ",touches.count)
+            }
+
             setNeedsDisplay()
         }
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) { touchesBegan(touches, with:event) }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        touchesBegan(touches, with:event)
+        
+    }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Swift.print("Ended ",touches.count)
         touched = false
+        delta = 0
         
         if isJuliaSlider() {    // julia, box
             control.hop = 1
             bulb.newBusy(.calc2)
         }
         else {
-            cvc.updateCalcButton(CALC_BUTTON_READY)
+            vc.updateCalcButton(CALC_BUTTON_READY)
+        }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Swift.print("Can ",touches.count)
+        if touches.count == 1 {
+            touchesEnded(touches, with:event)
         }
     }
     

@@ -3,7 +3,7 @@
 
 #include <simd/simd.h>
 
-#define WIDTH (32*9) // divisible by threadgroups (32)
+#define WIDTH 300 // divisible by threadgroups (20)
 
 #define VMAX  int((255000000 / sizeof(TVertex)) - 10000)
 
@@ -34,7 +34,7 @@ typedef struct {
     int range;
     int unused1;
     int unused2;
-    int unused3;
+    int cloudIndex;
 } Control;
 
 typedef struct {
