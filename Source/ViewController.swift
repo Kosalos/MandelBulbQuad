@@ -190,6 +190,28 @@ class ViewController: UIViewController {
             s.setNeedsDisplay()
         }
         
+        control.basex = 0
+        control.basey = 0
+        control.basez = 0
+        control.scale = 0.01
+        control.power = 8
+        control.re1 = 1
+        control.im1 = 1
+        control.mult1 = 1.9
+        control.zoom1 = 740
+        control.re2 = 0
+        control.im2 = 0
+        control.mult2 = 0
+        control.zoom2 = 0
+        
+        control.formula = 0
+        control.hop = 1
+        control.center = 5
+        control.spread = 2
+        control.offset = 64
+        control.range = 128
+        control.cloudIndex = 0
+        
         colorRange.initializeInt32(&control.range, .direct, 0,256,0, "Color Range")
         colorOffset.initializeInt32(&control.offset, .direct, 0,256,0, "Color Offset")
         colorSpread.initializeInt32(&control.spread, .direct, 0,10,0, "Spread")

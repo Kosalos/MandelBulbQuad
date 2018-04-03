@@ -235,7 +235,7 @@ class SliderViewNew: UIView {
             
             if !touched {
                 touched = true
-                Swift.print("Touched ",touches.count)
+                //Swift.print("Touched ",touches.count)
             }
 
             setNeedsDisplay()
@@ -248,7 +248,7 @@ class SliderViewNew: UIView {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        Swift.print("Ended ",touches.count)
+        //Swift.print("Ended ",touches.count)
         touched = false
         delta = 0
         
@@ -262,7 +262,7 @@ class SliderViewNew: UIView {
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        Swift.print("Can ",touches.count)
+        //Swift.print("Can ",touches.count)
         if touches.count == 1 {
             touchesEnded(touches, with:event)
         }

@@ -32,7 +32,7 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
         cell.tag = indexPath.row
         
         var cc = Control()
-        let dateString = loadData(indexPath.row,&cc)
+        let dateString = loadData(indexPath.row,&cc,true)
         let index = indexPath.row + 1
         var str:String = ""
         
@@ -115,7 +115,7 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
 
     var dateString = String("")
     
-    @discardableResult func loadData(_ index:Int, _ c: inout Control) -> String {
+    @discardableResult func loadData(_ index:Int, _ c: inout Control, _ loadFile:Bool) -> String {
         var dStr = String("**")
         
         determineURL(index)
@@ -128,14 +128,16 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
             // print(error)
         }
 
-        let data = NSData(contentsOf: fileURL)
-        data?.getBytes(&c, length:sz)
-        
+        if loadFile {
+            let data = NSData(contentsOf: fileURL)
+            data?.getBytes(&c, length:sz)
+        }
+
         return dStr
     }
     
     func loadAndDismissDialog(_ index:Int, _ cc: inout Control) {
-        loadData(index,&cc)
+        loadData(index,&cc,true)
         self.dismiss(animated: false, completion:nil)
         bulb.newBusy(.controlLoaded)
     }

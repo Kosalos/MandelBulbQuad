@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="ipad12_9" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,12 +12,12 @@
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="MandelBulbST" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="MandelBulbQuad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ve7-aF-loD"/>
                         <viewControllerLayoutGuide type="bottom" id="2Dy-TN-HU4"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3se-qz-xqx" userLabel="MetalView" customClass="Background" customModule="MandelBulbST" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="3se-qz-xqx" userLabel="MetalView" customClass="Background" customModule="MandelBulbQuad" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -84,7 +84,7 @@
                                     <action selector="formulaChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="YfD-Qe-zgk"/>
                                 </connections>
                             </segmentedControl>
-                            <view tag="3" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EgV-cR-UIc" customClass="HistogramView" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="3" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EgV-cR-UIc" customClass="HistogramView" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="190" y="683" width="302" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -121,72 +121,72 @@
                                     <action selector="centerPlusUp:" destination="BV1-FR-VrT" eventType="touchUpInside" id="U7t-cT-fO9"/>
                                 </connections>
                             </button>
-                            <view tag="12" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swd-VC-taN" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="12" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swd-VC-taN" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="753" y="682" width="159" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="14" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tuq-1P-o8M" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="14" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tuq-1P-o8M" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="608" y="682" width="137" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nGs-IJ-KIv" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nGs-IJ-KIv" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="264" y="801" width="148" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39N-e2-yE5" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39N-e2-yE5" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="264" y="844" width="148" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBg-Pk-sD8" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBg-Pk-sD8" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="264" y="887" width="148" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="3" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEk-84-9b0" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="3" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEk-84-9b0" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="264" y="931" width="148" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="4" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNO-4t-TqH" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="4" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNO-4t-TqH" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="416" y="801" width="132" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bNN-Ir-cFQ" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bNN-Ir-cFQ" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="416" y="844" width="132" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="6" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKR-SB-qrp" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="6" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKR-SB-qrp" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="416" y="887" width="132" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="7" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I0t-1M-FEm" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="7" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I0t-1M-FEm" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="416" y="931" width="132" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="8" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jHK-os-XLb" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="8" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jHK-os-XLb" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="552" y="801" width="137" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="9" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y1e-jA-wxG" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="9" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y1e-jA-wxG" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="552" y="844" width="137" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="10" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pTc-jh-e0Q" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="10" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pTc-jh-e0Q" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="552" y="887" width="137" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view tag="11" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qh6-rS-dEL" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="11" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qh6-rS-dEL" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="552" y="931" width="137" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -474,7 +474,7 @@
                                     <action selector="colorButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="n5O-kL-h5A"/>
                                 </connections>
                             </button>
-                            <view tag="13" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nfc-cP-PRH" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="13" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nfc-cP-PRH" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="753" y="721" width="159" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -492,13 +492,13 @@
                                     <action selector="cloudCountChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="YOc-0s-Lru"/>
                                 </connections>
                             </segmentedControl>
-                            <view tag="99" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AKf-hY-sgY" customClass="SliderViewNew" customModule="MandelBulbST" customModuleProvider="target">
+                            <view tag="99" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AKf-hY-sgY" customClass="SliderViewNew" customModule="MandelBulbQuad" customModuleProvider="target">
                                 <rect key="frame" x="264" y="760" width="284" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <gestureRecognizers/>
                     </view>
                     <connections>
@@ -585,7 +585,7 @@
         <!--Help View Controller-->
         <scene sceneID="Ebo-vr-ivu">
             <objects>
-                <viewController id="DmP-PU-S1P" customClass="HelpViewController" customModule="MandelBulbST" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DmP-PU-S1P" customClass="HelpViewController" customModule="MandelBulbQuad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4oy-Up-mt0"/>
                         <viewControllerLayoutGuide type="bottom" id="2CL-fs-gkq"/>
@@ -634,7 +634,7 @@
         <!--SaveLoadVC-->
         <scene sceneID="0be-Ek-k1H">
             <objects>
-                <viewController title="KeypadVC" id="7tH-9t-GCc" userLabel="SaveLoadVC" customClass="SaveLoadViewController" customModule="MandelBulbST" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="KeypadVC" id="7tH-9t-GCc" userLabel="SaveLoadVC" customClass="SaveLoadViewController" customModule="MandelBulbQuad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Otq-EQ-XCC"/>
                         <viewControllerLayoutGuide type="bottom" id="W5F-2I-CMN"/>
@@ -648,7 +648,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SLCell" rowHeight="58" id="iXI-ga-3YZ" customClass="SaveLoadCell" customModule="MandelBulbST" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SLCell" rowHeight="58" id="iXI-ga-3YZ" customClass="SaveLoadCell" customModule="MandelBulbQuad" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="367" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iXI-ga-3YZ" id="fof-zN-kzW">

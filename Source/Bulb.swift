@@ -11,42 +11,6 @@ enum Busy { case idle,calc,calc2,smooth,smooth2,quantize,vertices,controlLoaded 
 
 let FORMULA_JULIA = 5
 
-extension TVertex {
-    init(_ p:float3) {
-        pos = p
-        color = float4(1,1,1,1)
-    }
-}
-
-extension Control {
-    init() {
-        basex = 0
-        basey = 0
-        basez = 0
-        scale = 0.01
-        power = 8
-        re1 = 1
-        im1 = 1
-        mult1 = 1.9
-        zoom1 = 740
-        re2 = 0
-        im2 = 0
-        mult2 = 0
-        zoom2 = 0
-        
-        formula = 0
-        hop = 1
-        center = 5
-        spread = 2
-        offset = 64
-        range = 128
-        
-        unused1 = 0
-        unused2 = 0
-        cloudIndex = 0
-    }
-}
-
 extension CGPoint {
     mutating func reset() { x = 0; y = 0 }
 }
@@ -282,7 +246,7 @@ class Bulb {
         
         for i in 0 ..< cloudCount {
             control.cloudIndex = Int32(i)
-            controlBuffer.contents().copyBytes(from: &control, count:MemoryLayout<Control>.stride)
+            controlBuffer.contents().copyMemory(from: &control, byteCount:MemoryLayout<Control>.stride)
             
             let commandBuffer = commandQueue.makeCommandBuffer()!
             let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
@@ -320,7 +284,7 @@ class Bulb {
         
         for i in 0 ..< cloudCount {
             control.cloudIndex = Int32(i)
-            controlBuffer.contents().copyBytes(from: &control, count:MemoryLayout<Control>.stride)
+            controlBuffer.contents().copyMemory(from: &control, byteCount:MemoryLayout<Control>.stride)
 
             let commandBuffer = commandQueue.makeCommandBuffer()!
             let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
@@ -362,10 +326,10 @@ class Bulb {
         let jbSize = MemoryLayout<float3>.stride * 256
         
         switch colorMapIndex {
-        case 0 : jetBuffer.contents().copyBytes(from:colorMap1, count:jbSize)
-        case 1 : jetBuffer.contents().copyBytes(from:colorMap2, count:jbSize)
-        case 2 : jetBuffer.contents().copyBytes(from:colorMap3, count:jbSize)
-        case 3 : jetBuffer.contents().copyBytes(from:colorMap4, count:jbSize)
+        case 0 : jetBuffer.contents().copyMemory(from:colorMap1, byteCount:jbSize)
+        case 1 : jetBuffer.contents().copyMemory(from:colorMap2, byteCount:jbSize)
+        case 2 : jetBuffer.contents().copyMemory(from:colorMap3, byteCount:jbSize)
+        case 3 : jetBuffer.contents().copyMemory(from:colorMap4, byteCount:jbSize)
         default : break
         }
     }
@@ -387,7 +351,7 @@ class Bulb {
     }
     
     func quantize() {
-        controlBuffer.contents().copyBytes(from: &control, count:MemoryLayout<Control>.stride)
+        controlBuffer.contents().copyMemory(from: &control, byteCount:MemoryLayout<Control>.stride)
         
         let commandBuffer = commandQueue.makeCommandBuffer()!
         let commandEncoder = commandBuffer.makeComputeCommandEncoder()!

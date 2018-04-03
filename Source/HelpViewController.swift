@@ -16,4 +16,9 @@ class HelpViewController: UIViewController {
             fatalError("\n\nload help text failed\n\n")
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        textView.scrollRangeToVisible(NSMakeRange(0, 0))
+    }
+
 }
