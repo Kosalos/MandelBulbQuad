@@ -12,7 +12,7 @@ Also has MandelBox amd stacked Julia sets modes.
 Need help: Why does a Release build quit running immediately from XCode, even though the app runs fine
 on the iPad when you run it directly?
 
-<a href="https://www.paypal.me/Harry Kosalos/">
+<a href="https://www.paypal.me/Kosalos@cox.net/">
   <img alt="Support via PayPal" src="https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg"/>
 </a>
 
