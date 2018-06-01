@@ -12,4 +12,6 @@ Also has MandelBox amd stacked Julia sets modes.
 Need help: Why does a Release build quit running immediately from XCode, even though the app runs fine
 on the iPad when you run it directly?
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](kosalos@cox.net)
+
 ![Screenshot](MandelBulbQuad.png)
