@@ -12,6 +12,6 @@ Also has MandelBox amd stacked Julia sets modes.
 Need help: Why does a Release build quit running immediately from XCode, even though the app runs fine
 on the iPad when you run it directly?
 
-[![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/kosalos@cox.net/)
+[![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/kosalos/)
 
 ![Screenshot](MandelBulbQuad.png)
