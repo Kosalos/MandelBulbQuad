@@ -435,10 +435,9 @@ kernel void verticeShader
     if(cIndex < control.center - control.spread) return;
     if(cIndex > control.center + control.spread) return;
     
-    uint index = atomic_load(&counter);     // our assigned output vertex index
+    uint index = atomic_fetch_add_explicit(&counter, 0, memory_order_relaxed);
     if(index >= VMAX) return;
     index = atomic_fetch_add_explicit(&counter, 1, memory_order_relaxed);
-    if(index >= VMAX) return;
     
     device TVertex &v = vertices[index];
     float offset = float(control.cloudIndex) / float(NUM_CLOUD);

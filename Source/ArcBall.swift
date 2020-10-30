@@ -112,7 +112,7 @@ class ArcBall {
 
         //Swift.print("ArcBall move = ",cgPt.x,cgPt.y)
         
-        var Perp = vector3fCross(startVertex,endVertex)
+        let Perp = vector3fCross(startVertex,endVertex)
         
         var newRot = float4()
         

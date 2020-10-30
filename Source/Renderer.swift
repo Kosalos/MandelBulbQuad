@@ -151,13 +151,6 @@ class Renderer: NSObject, MTKViewDelegate {
         let toeIn:Float = 0.01
         let stereoAngle:Float = ident == 0 ? -toeIn : +toeIn
         
-        uniformBufferIndex = (uniformBufferIndex + 1) % maxBuffersInFlight
-        uniformBufferOffset = alignedUniformsSize * uniformBufferIndex
-        uniforms = UnsafeMutableRawPointer(dynamicUniformBuffer.contents() + uniformBufferOffset).bindMemory(to:Uniforms.self, capacity:1)
-        uniforms[0].projectionMatrix = projectionMatrix
-        uniforms[0].pointSize = pointSize
-        uniforms[0].mvp = projectionMatrix * translate(camera.x,camera.y,-camera.z) * rotate(stereoAngle,float3(0,1,0)) * arcBall.transformMatrix
-
         //-----------------------------------
         uniformBufferIndex = (uniformBufferIndex + 1) % maxBuffersInFlight
         uniformBufferOffset = alignedUniformsSize * uniformBufferIndex
@@ -217,20 +210,12 @@ func translate(_ t: float3) -> float4x4 {
     M.columns.3.y = t.y
     M.columns.3.z = t.z
     
-    return M //    float4x4(M)
+    return M
 }
 
 func translate(_ x: Float, _ y: Float, _ z: Float) -> float4x4 {
     return translate(float3(x: x, y: y, z: z))
 }
-
-//let kPi_f      = Float.pi
-//let k1Div180_f = Float(1.0) / Float(180.0)
-//let kRadians   = k1Div180_f * kPi_f
-//
-//func AAPLRadiansOverPi(_ degrees: Float) -> Float {
-//    return (degrees * k1Div180_f)
-//}
 
 func rotate(_ a: Float, _ r: float3) -> float4x4 {
     //    let a = AAPLRadiansOverPi(angle)
