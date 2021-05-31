@@ -346,25 +346,30 @@ class ViewController: UIViewController {
         
         if sscaledz != 0 { changeScale(control.scale * sscaledz) }
         
+        // > 0 = converge,  < 0 = diverge
+        
         if deltaRe != 0 {
-            control.re1 -= deltaRe
-            control.re2 += deltaRe
+            let diff = (control.re2 - control.re1) * dAmount
+            control.re1 += diff
+            control.re2 -= diff
             sList[4].setNeedsDisplay()
             sList[8].setNeedsDisplay()
             launchFastCalc = true
         }
         
         if deltaIm != 0 {
-            control.im1 -= deltaIm
-            control.im2 += deltaIm
+            let diff = (control.im2 - control.im1) * dAmount
+            control.im1 += diff
+            control.im2 -= diff
             sList[5].setNeedsDisplay()
             sList[9].setNeedsDisplay()
             launchFastCalc = true
         }
         
         if deltaMult != 0 {
-            control.mult1 -= deltaMult
-            control.mult2 += deltaMult
+            let diff = (control.mult2 - control.mult1) * dAmount
+            control.mult1 += diff
+            control.mult2 -= diff
             sList[6].setNeedsDisplay()
             sList[10].setNeedsDisplay()
             launchFastCalc = true
